@@ -1,0 +1,161 @@
+# Node.js
+
+## What is Node.js?
+
+* **Node.js is a JavaScript runtime** built on Chrome’s **V8 JavaScript engine**.
+* It allows JavaScript to run **outside the browser**, for example on a server.
+* Unlike browser JavaScript, Node.js has access to things such as:
+
+  * The **file system**
+  * The **network**
+  * The **operating system**
+* Browser-specific objects like `window` and `document` don't exist in Node.js.
+* Instead, Node.js provides its own globals and built-in modules, such as:
+
+  * `process` — provides information and control over the current Node.js process.
+  * `fs` — provides access to the file system.
+  * `http` — allows you to create HTTP servers.
+
+---
+
+## Node.js is Single-Threaded and Non-Blocking
+
+Node.js runs JavaScript on a **single main thread**.
+
+However, this doesn't mean Node.js can only do one thing at a time.
+
+When Node.js encounters a slow operation, such as:
+
+* Reading a file
+* Querying a database
+* Making a network request
+
+it can **hand that work off** to the operating system or Node.js's underlying system.
+
+While that operation is running, Node.js can continue handling other JavaScript code.
+
+When the operation finishes, the result is handled later using:
+
+* Callbacks
+* Promises
+* `async/await`
+
+### Simple idea
+
+```text
+JavaScript
+    ↓
+Start slow operation
+    ↓
+Hand it off
+    ↓
+Continue running other code
+    ↓
+Operation finishes
+    ↓
+Result comes back
+    ↓
+Callback / Promise / async-await handles it
+```
+
+This non-blocking approach is one of the main reasons Node.js works well for applications that handle many network requests.
+
+---
+
+# Simplest Node.js Server
+
+You can create an HTTP server in Node.js **without using any framework**.
+
+```js
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Hello from Node');
+});
+
+server.listen(3000, () => {
+    console.log('Listening on port 3000');
+});
+```
+
+### What is happening here?
+
+1. **Import the `http` module**
+
+```js
+const http = require('http');
+```
+
+Node.js provides the `http` module for creating HTTP servers.
+
+2. **Create the server**
+
+```js
+const server = http.createServer((req, res) => {
+```
+
+The callback runs whenever a request reaches the server.
+
+* `req` → information about the incoming request
+* `res` → used to send a response back to the client
+
+3. **Set the response status and headers**
+
+```js
+res.writeHead(200, { 'Content-Type': 'text/plain' });
+```
+
+`200` means the request was successful.
+
+4. **Send the response**
+
+```js
+res.end('Hello from Node');
+```
+
+This sends the text `"Hello from Node"` back to the client and ends the response.
+
+5. **Start listening for requests**
+
+```js
+server.listen(3000, () => {
+    console.log('Listening on port 3000');
+});
+```
+
+The server listens on **port 3000**.
+
+---
+
+## Running the Server
+
+Save the file, for example, as:
+
+```text
+init.js
+```
+
+Then run:
+
+```bash
+node init.js
+```
+
+You should see:
+
+```text
+Listening on port 3000
+```
+
+You can then open:
+
+```text
+http://localhost:3000
+```
+
+in your browser, and you should see:
+
+```text
+Hello from Node
+```
