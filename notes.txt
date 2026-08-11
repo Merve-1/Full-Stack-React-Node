@@ -159,3 +159,19 @@ in your browser, and you should see:
 ```text
 Hello from Node
 ```
+
+Synchronous Vs Asynchronous code (Blocking Vs Non-Blocking)
+
+```
+#Synchronous
+const input = fs.readFileSync('input.txt', 'utf-8');
+```
+
+---
+
+```
+#Asynchronous
+fs.readFile('input.txt', 'utf-8', (err, data) =>{
+    console.log(data);
+});
+```
