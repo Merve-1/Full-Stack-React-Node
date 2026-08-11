@@ -41,10 +41,108 @@ const server = http.createServer((req, res) => {
     // res.end('Hello from the server');
 
     const pathName = req.url;
-    if (pathName === '/' || pathName === '/overview') {
-        res.end('This is the OVERVIEW');
-    }else if (pathName === '/product') {
-        res.end('This is the PRODUCT');
+    if (pathName === '/' || pathName === '/index') {
+         fs.readFile('./templates/html/index.html', 'utf-8', (err, data) => {
+        if (err) {
+            res.writeHead(500, {
+                'Content-type': 'text/html'
+            });
+            res.end('<h1>Internal Server Error</h1>');
+            return;
+        }
+
+        res.writeHead(200, {
+            'Content-type': 'text/html'
+        });
+
+        res.end(data);
+    });
+
+    }else if (pathName === '/css/style.css') {
+
+    fs.readFile(
+        './templates/css/style.css',
+        'utf-8',
+        (err, data) => {
+
+            if (err) {
+                res.writeHead(500, {
+                    'Content-type': 'text/plain'
+                });
+
+                res.end('Could not load CSS');
+                return;
+            }
+
+            res.writeHead(200, {
+                'Content-type': 'text/css'
+            });
+
+            res.end(data);
+        }
+    );
+    } else if (pathName === '/service' || pathName.startsWith('/service/')) {
+
+    let id = 0;
+
+    if (pathName.startsWith('/service/')) {
+        id = Number(pathName.split('/')[2]);
+    }
+
+    fs.readFile('./dev-data/data.json', 'utf-8', (err, jsonData) => {
+
+        if (err) {
+            res.writeHead(500, {
+                'Content-type': 'text/html'
+            });
+
+            res.end('<h1>Could not load data</h1>');
+            return;
+        }
+
+        const services = JSON.parse(jsonData);
+
+        const service = services.find(s => s.id === id);
+
+        if (!service) {
+            res.writeHead(404, {
+                'Content-type': 'text/html'
+            });
+
+            res.end('<h1>Service not found</h1>');
+            return;
+        }
+
+        fs.readFile(
+            './templates/html/service.html',
+            'utf-8',
+            (err, data) => {
+
+                if (err) {
+                    res.writeHead(500, {
+                        'Content-type': 'text/html'
+                    });
+
+                    res.end('<h1>Internal Server Error</h1>');
+                    return;
+                }
+
+                const output = data
+                    .replaceAll('{%SERVICE_NAME%}', service.serviceName)
+                    .replaceAll('{%CATEGORY%}', service.category)
+                    .replaceAll('{%PLATFORMS%}', service.platforms)
+                    .replaceAll('{%SERVICE_TYPE%}', service.serviceType)
+                    .replaceAll('{%PRICE%}', service.price)
+                    .replaceAll('{%DESCRIPTION%}', service.description);
+
+                res.writeHead(200, {
+                    'Content-type': 'text/html'
+                });
+
+                res.end(output);
+            }
+        );
+    });
     }else if(pathName === '/api'){
         res.writeHead(200, {
         'Content-type': 'application/json',
