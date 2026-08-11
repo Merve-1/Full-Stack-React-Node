@@ -1,0 +1,79 @@
+[
+  {
+    "id": 0,
+    "serviceName": "Media Buying",
+    "image": "📊",
+    "category": "Paid Advertising",
+    "platforms": "Meta, Google, TikTok, Snapchat",
+    "serviceType": "Performance Marketing",
+    "price": "Custom",
+    "featured": true,
+    "description": "We plan, launch, and optimize paid advertising campaigns to reach the right audiences, improve campaign performance, and generate measurable business results."
+  },
+  {
+    "id": 1,
+    "serviceName": "Creative Advertising",
+    "image": "💡",
+    "category": "Creative Strategy",
+    "platforms": "Social Media, Display, Video",
+    "serviceType": "Creative Marketing",
+    "price": "Custom",
+    "featured": true,
+    "description": "We develop creative advertising concepts, messages, and campaign ideas that capture attention, communicate your value, and help your brand stand out."
+  },
+  {
+    "id": 2,
+    "serviceName": "Social Media Marketing",
+    "image": "📱",
+    "category": "Digital Marketing",
+    "platforms": "Instagram, Facebook, TikTok, LinkedIn",
+    "serviceType": "Social Media",
+    "price": "Custom",
+    "featured": false,
+    "description": "We create and manage social media strategies that keep your brand active, engage your audience, and build a stronger presence across the platforms that matter."
+  },
+  {
+    "id": 3,
+    "serviceName": "Campaign Strategy",
+    "image": "🎯",
+    "category": "Marketing Strategy",
+    "platforms": "Digital Channels",
+    "serviceType": "Strategy",
+    "price": "Custom",
+    "featured": true,
+    "description": "We build clear campaign strategies around your goals, audience, budget, messaging, and channels to create a focused path from awareness to conversion."
+  },
+  {
+    "id": 4,
+    "serviceName": "Audience Targeting",
+    "image": "👥",
+    "category": "Advertising",
+    "platforms": "Meta, Google, TikTok",
+    "serviceType": "Audience Strategy",
+    "price": "Custom",
+    "featured": false,
+    "description": "We identify and target the audiences most likely to be interested in your products or services using relevant demographic, behavioral, and interest-based signals."
+  },
+  {
+    "id": 5,
+    "serviceName": "Campaign Optimization",
+    "image": "⚡",
+    "category": "Performance Marketing",
+    "platforms": "Meta, Google, TikTok",
+    "serviceType": "Optimization",
+    "price": "Custom",
+    "featured": false,
+    "description": "We continuously monitor campaign performance and optimize budgets, audiences, creatives, and placements to improve efficiency and get more from your advertising spend."
+  },
+  {
+    "id": 6,
+    "serviceName": "Marketing Analytics",
+    "image": "📈",
+    "category": "Data & Analytics",
+    "platforms": "Google Analytics, Ad Platforms",
+    "serviceType": "Analytics",
+    "price": "Custom",
+    "featured": false,
+    "description": "We turn campaign data into clear insights that show what is working, where your budget is going, and which opportunities can improve your marketing performance."
+  }
+]

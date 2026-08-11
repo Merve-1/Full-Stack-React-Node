@@ -20,6 +20,20 @@ console.log(textIn);
 //     res.end('Hello from the server');
 // });
 
+
+const data = fs.readFile('./dev-data/data.json', 'utf-8', (err, data) => {
+    if(err) {
+        res.writeHead(500, {
+                'Content-type': 'text/html',
+                'my-own-header': 'hello-world'
+        });
+        res.end('<h1>Internal Server Error</h1>');
+    }
+    const productData = JSON.parse(data);
+    
+});
+    
+
 const server = http.createServer((req, res) => {
     console.log(
         `Request: ${req.method} ${req.url} | Port: ${req.socket.remotePort} | Remote Address: ${req.socket.remoteAddress} | Status: ${res.statusCode}`
@@ -32,20 +46,11 @@ const server = http.createServer((req, res) => {
     }else if (pathName === '/product') {
         res.end('This is the PRODUCT');
     }else if(pathName === '/api'){
-        fs.readFile('./data.json', 'utf-8', (err, data) => {
-            if(err) {
-                res.writeHead(500, {
-                    'Content-type': 'text/html',
-                    'my-own-header': 'hello-world'
-                });
-                res.end('<h1>Internal Server Error</h1>');
-            }
-            res.writeHead(200, {
-                'Content-type': 'application/json',
-                'my-own-header': 'hello-world'
-            });
-            res.end(data);
-        });
+        res.writeHead(200, {
+        'Content-type': 'application/json',
+        'my-own-header': 'hello-world'
+    });
+    res.end(data);
     }else{
         res.writeHead(404, {
             'Content-type': 'text/html',
